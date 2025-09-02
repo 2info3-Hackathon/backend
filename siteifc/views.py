@@ -1,3 +1,7 @@
-from django.shortcuts import render
+from rest_framework.viewsets import ModelViewSet
+from .models import Eventos
+from .serializers import EventosSerializer
 
-# Create your views here.
+class EstadoViewSet(ModelViewSet):
+    queryset = Eventos.objects.all()
+    serializer_class = EventosSerializer
