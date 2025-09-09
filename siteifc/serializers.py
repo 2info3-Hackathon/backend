@@ -1,0 +1,77 @@
+from rest_framework.serializers import ModelSerializer
+from .models import Eventos, Tipo_user, Grupo_estudo, Comite, Comissao, Nucleos, User, Atendimento, Vendas, Reservar, User_eventos, User_grupo, User_comite, User_comissao, User_nucleos
+
+class EventosSerializer(ModelSerializer):
+    class Meta:
+        model = Eventos
+        fields = '__all__'
+
+class Tipo_userSerializer(ModelSerializer):
+    class Meta:
+        model = Tipo_user
+        fields = '__all__'
+
+class Grupo_estudoSerializer(ModelSerializer):
+    class Meta:
+        model = Grupo_estudo
+        fields = '__all__'
+
+class ComiteSerializer(ModelSerializer):
+    class Meta:
+        model = Comite
+        fields = '__all__'
+
+class ComissaoSerializer(ModelSerializer):
+    class Meta:
+        model = Comissao
+        fields = '__all__'
+
+class NucleosSerializer(ModelSerializer):
+    class Meta:
+        model = Nucleos
+        fields = '__all__'
+
+class UserSerializer(ModelSerializer):
+    class Meta:
+        model = User
+        fields = '__all__'
+
+class AtendimentoSerializer(ModelSerializer):
+    class Meta:
+        model = Atendimento
+        fields = '__all__'
+
+class VendasSerializer(ModelSerializer):
+    class Meta:
+        model = Vendas
+        fields = '__all__'
+
+class ReservarSerializer(ModelSerializer):
+    class Meta:
+        model = Reservar
+        fields = '__all__'
+
+class User_eventosSerializer(ModelSerializer):
+    class Meta:
+        model = User_eventos
+        fields = '__all__'
+
+class User_grupoSerializer(ModelSerializer):
+    class Meta:
+        model = User_grupo
+        fields = '__all__'
+
+class User_comiteSerializer(ModelSerializer):
+    class Meta:
+        model = User_comite
+        fields = '__all__'
+
+class User_comissaoSerializer(ModelSerializer):
+    class Meta:
+        model = User_comissao
+        fields = '__all__'
+
+class User_nucleosSerializer(ModelSerializer):
+    class Meta:
+        model = User_nucleos
+        fields = '__all__'
