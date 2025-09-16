@@ -1,3 +1,4 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 # Create your models here.
@@ -94,18 +95,19 @@ class Nucleos(models.Model):
         verbose_name_plural = "Núcleos"
         verbose_name = "Núcleo"
 
-class User(models.Model):
-    nome = models.CharField(max_length=80)
-    data_nascimento = models.DateField
-    email = models.EmailField
-    login = models.CharField(max_length=120)
-    telefone = models.CharField(max_length=15)
-    senha = models.CharField(max_length=30)
-    tipo_user = models.ForeignKey(Tipo_user, on_delete=models.PROTECT)
+class User(AbstractUser):
+    first_name = None
+    last_name = None
+    nome = models.CharField(max_length=80, blank=True, null=True)
+    data_nascimento = models.DateField(blank=True, null=True)
+    email = models.EmailField(blank=True, null=True)
+    username = models.CharField(max_length=120, unique=True)
+    telefone = models.CharField(max_length=15, blank=True, null=True)
+    tipo_user = models.ForeignKey(Tipo_user, on_delete=models.PROTECT, blank=True, null=True)
 
     def __str__(self):
 
-        return f'{self.nome} - {self.login}'
+        return f'{self.nome} - {self.username}'
     
     class Meta:
          

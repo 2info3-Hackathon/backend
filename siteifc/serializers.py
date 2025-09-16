@@ -1,3 +1,5 @@
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework.serializers import ModelSerializer
 from .models import Eventos, Tipo_user, Grupo_estudo, Comite, Comissao, Nucleos, User, Atendimento, Vendas, Reservar, User_eventos, User_grupo, User_comite, User_comissao, User_nucleos
 
@@ -75,3 +77,14 @@ class User_nucleosSerializer(ModelSerializer):
     class Meta:
         model = User_nucleos
         fields = '__all__'
+
+
+class SiteIfcAuthSerializer(TokenObtainPairSerializer):
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+        if user.tipo_user:
+            token['tipo'] = user.tipo_user.descricao
+        else:
+            token['tipo'] = None
+        return token
