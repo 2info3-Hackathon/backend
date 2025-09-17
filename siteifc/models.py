@@ -7,11 +7,11 @@ class Eventos(models.Model):
 
     nome = models.CharField(max_length=80)
     descricao = models.CharField(max_length=5000)
-    data = models.DateField
-    hora = models.TimeField
+    data = models.DateField()
+    hora = models.TimeField()
     organizador = models.CharField(max_length=80)
     telefone = models.CharField(max_length=15)
-    email = models.EmailField
+    email = models.EmailField()
 
     def __str__(self):
 
@@ -36,9 +36,9 @@ class Tipo_user(models.Model):
 
 class Grupo_estudo(models.Model):
     materia = models.CharField(max_length=45)
-    horario = models.TimeField
+    horario = models.TimeField()
     local = models.CharField(max_length=45)
-    dia = models.DateField
+    dia = models.DateField()
 
     def __str__ (self):
 
@@ -115,8 +115,8 @@ class User(AbstractUser):
 
 class Atendimento(models.Model):
     nome = models.CharField(max_length=80)
-    data = models.DateField
-    hora = models.TimeField
+    data = models.DateField()
+    hora = models.TimeField()
     local = models.CharField(max_length=50)
     user = models.ForeignKey(User, on_delete=models.PROTECT)
 
@@ -131,8 +131,8 @@ class Atendimento(models.Model):
 
 class Vendas(models.Model):
     nome = models.CharField(max_length=80)
-    data = models.DateField
-    hora = models.TimeField
+    data = models.DateField()
+    hora = models.TimeField()
     local = models.CharField(max_length=50)
     preco = models.CharField(max_length=9)
     nome_produto = models.CharField(max_length=50)
@@ -148,7 +148,7 @@ class Vendas(models.Model):
         verbose_name = "Venda"
 
 class Reservar(models.Model):
-    data = models.DateField
+    data = models.DateField()
     atendimento = models.CharField(max_length=45)
     venda = models.CharField(max_length=45)
     user = models.ForeignKey(User, on_delete = models.PROTECT)
