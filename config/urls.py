@@ -1,6 +1,10 @@
 from django.contrib import admin
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
 from siteifc.views import EventosViewSet, Tipo_userViewSet, Grupo_estudoViewSet, ComiteViewSet, ComissaoViewSet, NucleosViewSet, UserViewSet, AtendimentoViewSet, VendasViewSet, ReservarViewSet, User_eventosViewSet, User_grupoViewSet, User_comiteViewSet, User_comissaoViewSet, User_nucleosViewSet
 
 router = DefaultRouter()
@@ -21,6 +25,9 @@ router.register(r'user_comissao', User_comissaoViewSet)
 router.register(r'user_nucleos', User_nucleosViewSet)
 
 urlpatterns = [
-    path('', include(router.urls)),
     path('admin/', admin.site.urls),
+    path('api/', include(router.urls)),
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+
 ]
