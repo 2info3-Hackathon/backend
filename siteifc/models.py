@@ -153,11 +153,11 @@ class Reservar(models.Model):
     venda = models.CharField(max_length=45)
     user = models.ForeignKey(User, on_delete = models.PROTECT)
     vendas = models.ForeignKey(Vendas, on_delete = models.PROTECT)
-    atendimento = models.ForeignKey(Atendimento, on_delete = models.PROTECT)
+    atendimentos = models.ForeignKey(Atendimento, on_delete = models.PROTECT)
 
     def __str__(self):
 
-        return f'{self.user} /n {self.vendas} /n {self.atendimento}'
+        return f'{self.user} /n {self.vendas} /n {self.atendimentos}'
     
     class Meta:
          

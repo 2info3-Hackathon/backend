@@ -1,4 +1,7 @@
 from rest_framework.viewsets import ModelViewSet
+from rest_framework.decorators import action
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
 from .models import Eventos, Tipo_user, Grupo_estudo, Comite, Comissao, Nucleos, User, Atendimento, Vendas, Reservar, User_eventos, User_grupo, User_comite, User_comissao, User_nucleos
 from .serializers import EventosSerializer, Tipo_userSerializer, Grupo_estudoSerializer, ComiteSerializer, ComissaoSerializer, NucleosSerializer, UserSerializer, AtendimentoSerializer, VendasSerializer, ReservarSerializer, User_eventosSerializer, User_grupoSerializer, User_comiteSerializer, User_comissaoSerializer, User_nucleosSerializer
 
@@ -29,6 +32,12 @@ class NucleosViewSet(ModelViewSet):
 class UserViewSet(ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+    @action(detail=False, methods=['get'], permission_classes=[IsAuthenticated])
+    def me(self, request):
+        serializer = self.get_serializer(request.user)
+        return Response(serializer.data)
+
 
 class AtendimentoViewSet(ModelViewSet):
     queryset = Atendimento.objects.all()
