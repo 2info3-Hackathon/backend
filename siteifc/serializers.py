@@ -1,7 +1,7 @@
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework.serializers import ModelSerializer
-from .models import Eventos, Tipo_user, Grupo_estudo, Comite, Comissao, Nucleos, User, Atendimento, Vendas, Reservar, User_eventos, User_grupo, User_comite, User_comissao, User_nucleos
+from .models import Eventos, Tipo_user, Turma, Grupo_estudo, Comite, Comissao, Nucleos, User, Atendimento, Vendas, Reservar, User_eventos, User_grupo, User_comite, User_comissao, User_nucleos
 
 class EventosSerializer(ModelSerializer):
     class Meta:
@@ -11,6 +11,11 @@ class EventosSerializer(ModelSerializer):
 class Tipo_userSerializer(ModelSerializer):
     class Meta:
         model = Tipo_user
+        fields = '__all__'
+
+class TurmaSerializer(ModelSerializer):
+    class Meta:
+        model = Turma
         fields = '__all__'
 
 class Grupo_estudoSerializer(ModelSerializer):

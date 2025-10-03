@@ -1,10 +1,11 @@
 from django.contrib import admin
-from .models import Eventos, Tipo_user, Grupo_estudo, Comite, Comissao, Nucleos, User, Atendimento, Vendas, Reservar, User_eventos, User_grupo, User_comite, User_comissao, User_nucleos
+from .models import Eventos, Tipo_user, Turma, Grupo_estudo, Comite, Comissao, Nucleos, User, Atendimento, Vendas, Reservar, User_eventos, User_grupo, User_comite, User_comissao, User_nucleos
 
 # Register your models here.
 
 admin.site.register(Eventos)
 admin.site.register(Tipo_user)
+admin.site.register(Turma)
 admin.site.register(Grupo_estudo)
 admin.site.register(Comite)
 admin.site.register(Comissao)

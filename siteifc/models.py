@@ -34,6 +34,17 @@ class Tipo_user(models.Model):
         verbose_name_plural = "Tipos de usuários"
         verbose_name = "Tipo de usuário"
 
+class Turma(models.Model):
+    descricao = models.CharField(max_length=10)
+
+    def __str__(self):
+        return self.descricao
+    
+    class Meta:
+         
+        verbose_name_plural = "Turmas"
+        verbose_name = "Turma"
+
 class Grupo_estudo(models.Model):
     materia = models.CharField(max_length=45)
     horario = models.TimeField()
@@ -137,6 +148,7 @@ class Vendas(models.Model):
     preco = models.CharField(max_length=9)
     nome_produto = models.CharField(max_length=50)
     user = models.ForeignKey(User, on_delete = models.PROTECT)
+    turma = models.ForeignKey(Turma, on_delete=models.PROTECT, blank=True, null=True)
 
     def __str__(self):
 

@@ -5,11 +5,12 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
-from siteifc.views import EventosViewSet, Tipo_userViewSet, Grupo_estudoViewSet, ComiteViewSet, ComissaoViewSet, NucleosViewSet, UserViewSet, AtendimentoViewSet, VendasViewSet, ReservarViewSet, User_eventosViewSet, User_grupoViewSet, User_comiteViewSet, User_comissaoViewSet, User_nucleosViewSet
+from siteifc.views import EventosViewSet, Tipo_userViewSet, TurmaViewSet, Grupo_estudoViewSet, ComiteViewSet, ComissaoViewSet, NucleosViewSet, UserViewSet, AtendimentoViewSet, VendasViewSet, ReservarViewSet, User_eventosViewSet, User_grupoViewSet, User_comiteViewSet, User_comissaoViewSet, User_nucleosViewSet
 
 router = DefaultRouter()
 router.register(r'eventos', EventosViewSet)
 router.register(r'tipo_usuario', Tipo_userViewSet)
+router.register(r'turma', TurmaViewSet)
 router.register(r'grupo_estudo', Grupo_estudoViewSet)
 router.register(r'comite', ComiteViewSet)
 router.register(r'comissao', ComissaoViewSet)
