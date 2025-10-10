@@ -2,6 +2,8 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from rest_framework.permissions import AllowAny
+
 from .models import Eventos, Tipo_user, Turma, Grupo_estudo, Comite, Comissao, Nucleos, User, Atendimento, Vendas, Reservar, User_eventos, User_grupo, User_comite, User_comissao, User_nucleos
 from .serializers import EventosSerializer, Tipo_userSerializer, TurmaSerializer, Grupo_estudoSerializer, ComiteSerializer, ComissaoSerializer, NucleosSerializer, UserSerializer, AtendimentoSerializer, VendasSerializer, ReservarSerializer, User_eventosSerializer, User_grupoSerializer, User_comiteSerializer, User_comissaoSerializer, User_nucleosSerializer
 
@@ -12,6 +14,7 @@ class EventosViewSet(ModelViewSet):
 class Tipo_userViewSet(ModelViewSet):
     queryset = Tipo_user.objects.all()
     serializer_class = Tipo_userSerializer
+    permission_classes = [AllowAny]
 
 class TurmaViewSet(ModelViewSet):
     queryset = Turma.objects.all()
@@ -37,11 +40,19 @@ class UserViewSet(ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
-    @action(detail=False, methods=['get'], permission_classes=[IsAuthenticated])
+    @action(detail=False, methods=['get', 'patch'], permission_classes=[IsAuthenticated])
     def me(self, request):
-        serializer = self.get_serializer(request.user)
-        return Response(serializer.data)
+        user = request.user
 
+        if request.method == 'GET':
+            serializer = self.get_serializer(user)
+            return Response(serializer.data)
+
+        elif request.method == 'PATCH':
+            serializer = self.get_serializer(user, data=request.data, partial=True)
+            serializer.is_valid(raise_exception=True)
+            user = serializer.save()
+            return Response(self.get_serializer(user).data)
 
 class AtendimentoViewSet(ModelViewSet):
     queryset = Atendimento.objects.all()

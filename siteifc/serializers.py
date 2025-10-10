@@ -41,7 +41,32 @@ class NucleosSerializer(ModelSerializer):
 class UserSerializer(ModelSerializer):
     class Meta:
         model = User
-        fields = '__all__'  # ou liste os campos específicos
+        fields = '__all__'
+        read_only_fields = ('is_staff', 'is_superuser', 'last_login', 'date_joined')
+    
+    def update(self, instance, validated_data):
+        validated_data.pop('is_superuser', None)
+        validated_data.pop('is_staff', None)
+
+        password = validated_data.pop('password', None)
+
+        many_to_many_fields = []
+        for field in instance._meta.many_to_many:
+            if field.name in validated_data:
+                many_to_many_fields.append((field.name, validated_data.pop(field.name)))
+
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
+
+        if password:
+            instance.set_password(password)
+
+        instance.save()
+
+        for field_name, value in many_to_many_fields:
+            getattr(instance, field_name).set(value)
+
+        return instance
 
     def create(self, validated_data):
         password = validated_data.pop('password')
